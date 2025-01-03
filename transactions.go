@@ -492,7 +492,7 @@ type RefundTransactionResponse struct {
 
 type TransactionsService service
 
-// ListDeprecated: List transactions (deprecated)
+// ListDeprecated: List transactions
 // Lists detailed history of all transactions associated with the merchant profile.
 func (s *TransactionsService) ListDeprecated(ctx context.Context, params ListTransactionsParams) (*ListTransactionsResponse, error) {
 	path := fmt.Sprintf("/v0.1/me/transactions/history")
@@ -530,7 +530,7 @@ func (s *TransactionsService) ListDeprecated(ctx context.Context, params ListTra
 	return &v, nil
 }
 
-// GetDeprecated: Retrieve a transaction (deprecated)
+// GetDeprecated: Retrieve a transaction
 // Retrieves the full details of an identified transaction. The transaction resource is identified by a query parameter and *one* of following parameters is required:
 //   - `id`
 //   - `internal_id`

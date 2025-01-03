@@ -482,7 +482,7 @@ func (s *MerchantService) GetDoingBusinessAs(ctx context.Context) (*DoingBusines
 	return &v, nil
 }
 
-// ListBankAccountsDeprecated: List bank accounts (deprecated)
+// ListBankAccountsDeprecated: List bank accounts
 // Retrieves bank accounts of the merchant.
 func (s *MerchantService) ListBankAccountsDeprecated(ctx context.Context, params ListBankAccountsParams) (*ListBankAccountsResponse, error) {
 	path := fmt.Sprintf("/v0.1/me/merchant-profile/bank-accounts")
