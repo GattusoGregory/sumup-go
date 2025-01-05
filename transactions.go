@@ -620,7 +620,24 @@ func (s *TransactionsService) List(ctx context.Context, merchantCode string, par
 //   - `client_transaction_id`
 func (s *TransactionsService) Get(ctx context.Context, merchantCode string, params GetTransactionV21Params) (*TransactionFull, error) {
 	path := fmt.Sprintf("/v2.1/merchants/%v/transactions", merchantCode)
-
+	
+	path := fmt.Sprintf("/v2.1/merchants/%v/transactions", merchantCode)
+	
+	// Create a query string from the params
+	var queryString string
+	if params.Id != nil {
+		queryString += fmt.Sprintf("id=%v&", *params.Id)
+	}
+	if params.InternalId != nil {
+		queryString += fmt.Sprintf("internal_id=%v&", *params.InternalId)
+	}
+	if params.TransactionCode != nil {
+		queryString += fmt.Sprintf("transaction_code=%v&", *params.TransactionCode)
+	}
+	if queryString != "" {
+		queryString = queryString[:len(queryString)-1]
+		path += "?" + queryString
+	}
 	req, err := s.client.NewRequest(ctx, http.MethodGet, path, http.NoBody)
 	if err != nil {
 		return nil, fmt.Errorf("error building request: %v", err)
@@ -648,7 +665,6 @@ func (s *TransactionsService) Get(ctx context.Context, merchantCode string, para
 
 	var v TransactionFull
 	if err := dec.Decode(&v); err != nil {
-		return nil, fmt.Errorf("decode response: %s", err.Error())
 	}
 
 	return &v, nil
